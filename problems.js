@@ -85,7 +85,11 @@ var findMin = function(nums) {
 };
 
 
+// let num2 = [3, 4, 5, 1, 2]
+// console.log(findMin(num2))
 
+// let num3 = [4, 5, 6, 7, 0, 1, 2]
+// console.log(findMin(num3))
 
 
 /***************************************************************************** */
