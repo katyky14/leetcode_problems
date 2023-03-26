@@ -1,5 +1,11 @@
 
 
+
+
+
+
+
+
  /*
     Maximum Product Subarray
 
@@ -34,6 +40,8 @@ The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit int
 
 
 var maxProduct = function(nums) {
+    // Brute force start
+
     // let largest = nums[0];
 
     // for (let i = 0; i < nums.length; i++) {
@@ -50,6 +58,8 @@ var maxProduct = function(nums) {
 
 
     // return largest;
+
+    //end of BRUTE FORCE
 
 //      let globalMaxProduct = nums[0];
 
