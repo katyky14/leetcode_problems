@@ -40,6 +40,16 @@ nums is an ascending array that is possibly rotated.
 */
 
 
+var search = function(nums, target) {
+    // brute force
+    // for(let i = 0; i < nums.length; i++) {
+    //     if (nums[i] === target) {
+    //         return i
+    //     }
+    // }
+
+    // return -1;
+  };
 
 
 
@@ -47,6 +57,7 @@ nums is an ascending array that is possibly rotated.
 
 
 
+/************************************************************************* */
 
 /*
 Find Minimum in Rotated Sorted Array
