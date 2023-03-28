@@ -49,6 +49,33 @@ var search = function(nums, target) {
     // }
 
     // return -1;
+
+
+    // optimize solution Olog n
+
+     // create a left index assign it to be the first index
+  // create a right index assign it to be the last index
+
+  //loop through the array
+    // if it is sorted
+    // create mid pivot variable and assign it to the mid point between the num in the left and the right
+    // if the target is equal to num in the mid
+      // return the index - mid
+
+
+    // search the left sorted portion
+    // if the nums in the left is less or equal to the num in the mid
+      // if the target is greater than the num in the mid or if the target is less than the num in the left
+          // we reassign left to be the mid plus one (incrementing the index to the right by becoming the new left)
+        // else
+            // we reassing the right to mid minus one
+    // else
+      // if the target is less than the num in the mid or target is less than the num of the right
+          // reassing right to mid plus one
+      // else
+        // reassing left mid minus one
+
+
   };
 
 
