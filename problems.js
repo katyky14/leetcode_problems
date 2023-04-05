@@ -37,11 +37,55 @@ Constraints:
 
 
 var threeSum = function(nums) {
+    // BRute force
+    // create a result variable and assign it to an empty array
+    // create a sum variable and assign it to zero
+    // 1loop through the array
+        // second loop
+            // third loop
+                // if the sum of those three nums in loop equals zero
+                    // add to the array
+
+    // return the result var
+
+    // let result = [];
+    // let nums11 = new Set()
+
+    // for (let i = 0; i < nums.length; i++) {
+    //     let sum = 0;
+    //     let num1 = nums[i];
+    //     console.log('the num 1', num1)
+    //     for (let j = i + 1; j < nums.length; j++) {
+    //         let num2 = nums[j];
+    //         console.log('the num 2', num2)
+    //         for (let k = j + 1; k < nums.length; k++) {
+    //             let num3 = nums[k];
+    //             console.log('the num 3', num3)
+    //             if (k !== j +1 && num3 === nums[k - 1]) continue;
+    //             sum = num1 + num2 + num3
+    //             // console.log('the sum is ----', sum)
+    //             if (num1 + num2 + num3 === 0) {
+    //                 result.push([num1, num2, num3])
+    //             }
+    //         }
+    //     }
+    // }
+
+    // return result;
+
+
+
+    //optimatize code
+    
+
+
 
 };
 
+let nums = [-1,0,1,2,-1,-4]
+console.log(threeSum(nums))
 
-/************************************************************************************** */
+/************************************************************************************** ****/
 
 
 /*
