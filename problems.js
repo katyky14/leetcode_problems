@@ -76,9 +76,84 @@ var threeSum = function(nums) {
 
 
     //optimatize code
-    
+    // let res = [];
+    // nums.sort((a,b) => a-b);
 
+    // for (let i = 0; i < nums.length; i++) {
+    //     if (i > 0 && nums[i] === nums[i - 1]) continue;
 
+    //     //two sums, pointer
+    //     let left = i + 1;
+    //     let right = nums.length - 1;
+
+    //     while(left < right) {
+    //         threeSum = nums[i] + nums[left] + nums[right];
+
+    //         if (threeSum > 0){
+    //            right-= 1;
+    //         } else if (threeSum < 0) {
+    //             left += 1;
+    //         } else {
+    //             res.push([nums[i], nums[left], nums[right]])
+    //             left+=1;
+    //             while (nums[left] === nums[left -1] && left < right) {
+    //                 left++
+    //             }
+    //         }
+    //     }
+    // }
+
+    // return res;
+
+    // optimize solution without RECURSION
+
+    let res =  [];
+    nums.sort((a, b) => a - b);
+
+    for (let i = 0; i < nums.length; i++) {
+        if (i > 0 && nums[i] === nums[i -1]) {
+            continue;
+        }
+
+        let l = i + 1;
+        let r = nums.length - 1;
+
+        while(l < r) {
+            if (nums[i] + nums[l] + nums[r] > 0) {
+                r--
+                // continue
+            } else if (nums[i] + nums[l] + nums[r] < 0) {
+                l++
+                // continue
+            } else {
+                res.push([nums[i], nums[l], nums[r]])
+                l++;
+                while(nums[l] === nums[l - 1] && l < r) {
+                    l++
+                    // continue
+                }
+            }
+        }
+
+        // while(l < r) {
+        //     if (nums[l] + nums[r] + nums[i] === 0) {
+        //         res.push([nums[i], nums[l], nums[r]])
+        //     } else if (nums[i] + nums[l] + nums[r] > 0) {
+        //         r--;
+        //         continue
+        //     } else if (nums[i]+ nums[l] + nums[r] < 0) {
+        //         l++;
+        //         continue
+        //     }
+        //     l++
+        //     while (nums[l] === nums[l-1] && l < r) {
+        //         l++;
+        //         continue
+        //     }
+        // }
+    }
+
+    return res;
 
 };
 
