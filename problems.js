@@ -699,21 +699,23 @@ var isValidSudoku = function (board) {
     // console.log('the length', board.length)
     // console.log('the inner length', board[0].length)
     for (let row = 0; row < board.length; row++) {
-        //let rowSet = new Set(), colSet = new Set(), threeSet = new Set();
+        // this has to be inside, outside will give me false as answer
         let rowSet = new Set()
         let colSet = new Set()
         let threeSet = new Set()
+        //let rowSet = new Set(), colSet = new Set(), threeSet = new Set();
         for (let col = 0; col < board.length; col++) {
             //let box = board[Math.floor(row / 3)][Math.floor(col / 3)]
             let box = board[3 * Math.floor(row / 3) + Math.floor(col / 3)][3 * (row % 3) + (col % 3)];
             //   console.log('the box', box)
-            console.log('the row', board[row][col])
-            console.log('the col', board[col][row])
+            // https://leetcode.com/problems/valid-sudoku/solutions/476369/javascript-solution-beats-100-with-explanation-real-explanations/
+            // console.log('the row', board[row][col])
+            // console.log('the col', board[col][row])
 
             //if (board[row][col] === '.' || board[col][row] === '.' || box === '.') continue;
 
             if (
-                // below I did not take care of the . , so it was giving me false - the log 
+                // below I did not take care of the . , so it was giving me false - the log
                 /*
                 the row 5
 the col 5
@@ -751,15 +753,15 @@ the col 8
             ) {
                 return false
             } else {
-                console.log('the set before', rowSet)
-                console.log('the col set before', colSet)
-                console.log('the box set before', threeSet)
+                // console.log('the set before', rowSet)
+                // console.log('the col set before', colSet)
+                // console.log('the box set before', threeSet)
                 rowSet.add(board[row][col])
                 colSet.add(board[col][row])
                 threeSet.add(box)
-                console.log('the set', rowSet)
-                console.log('the col set', colSet)
-                console.log('the box set', threeSet)
+                // console.log('the set', rowSet)
+                // console.log('the col set', colSet)
+                // console.log('the box set', threeSet)
             }
         }
     }
@@ -768,8 +770,44 @@ the col 8
 
 
 
+    /**
+     other solution
+
+
+      for (let i = 0; i < 9; i++) {
+    let row = new Set(),
+        col = new Set(),
+        box = new Set();
+
+    for (let j = 0; j < 9; j++) {
+      let _row = board[i][j];
+      let _col = board[j][i];
+      let _box = board[3*Math.floor(i/3)+Math.floor(j/3)][3*(i%3)+(j%3)]
+
+      if (_row != '.') {
+        if (row.has(_row)) return false;
+        row.add(_row);
+      }
+      if (_col != '.') {
+        if (col.has(_col)) return false;
+        col.add(_col);
+      }
+
+      if (_box != '.') {
+        if (box.has(_box)) return false;
+        box.add(_box);
+      }
+    }
+  }
+  return true
+
+
+     */
+
 
 };
+
+// https://leetcode.com/problems/valid-sudoku/solutions/1647166/javascript/
 
 let board =
     [["5", "3", ".", ".", "7", ".", ".", ".", "."]
@@ -781,7 +819,7 @@ let board =
         , [".", "6", ".", ".", ".", ".", "2", "8", "."]
         , [".", ".", ".", "4", "1", "9", ".", ".", "5"]
         , [".", ".", ".", ".", "8", ".", ".", "7", "9"]]
-console.log(isValidSudoku(board))//Output: true
+//console.log(isValidSudoku(board))//Output: true
 
 // let board2 =
 //     [["8", "3", ".", ".", "7", ".", ".", ".", "."]
@@ -794,3 +832,246 @@ console.log(isValidSudoku(board))//Output: true
 //         , [".", ".", ".", "4", "1", "9", ".", ".", "5"]
 //         , [".", ".", ".", ".", "8", ".", ".", "7", "9"]]
 // console.log(isValidSudoku(board2))//Output: false
+
+
+var merge = function(intervals) {
+
+    // let stack = [];
+    // for (let i = 0; i < intervals.length; i++) {
+
+    //     for (let j = 1; j < intervals.length; j++) {
+    //         console.log('the i', intervals[i])
+    //         console.log('the i j', intervals[i][j])
+    //         console.log('the j', intervals[j])
+    //         if (intervals[i + 1] >= intervals[i][j]) {
+    //             stack.push([intervals[i], ...intervals[j]])
+    //         } else {
+    //             stack.push(intervals[i], intervals[j])
+    //         }
+    //     }
+    // }
+
+    // return stack
+
+    intervals.sort((a, b ) => a[0] - b[0]);
+    //intervals.sort()
+
+    let stack = [intervals[0]]; // avoid edge case??
+
+    for (let i = 0; i < intervals.length; i++) {
+        let lastEnd = stack[stack.length -1];
+        console.log('the last end', lastEnd)
+        console.log('the 0 interval', intervals[0])
+        console.log('the 1 inter', intervals[1])
+        if (intervals[1] <= lastEnd[1]) {
+            stack[1] = Math.max(lastEnd[1], intervals[1])
+        } else {
+            stack.push([intervals[0], intervals[1]])
+        }
+    }
+
+    return stack
+};
+
+
+
+let intervals = [[1,3],[2,6],[8,10],[15,18]]
+//console.log(merge(intervals))//Output: [[1,6],[8,10],[15,18]]
+
+
+
+var buildArray = function(nums) {
+    /*
+    i = array of nums
+    return ans array
+    where the number of the current is the index of the number we are pushing into it
+
+    edge cases:
+        - what if the array is empty?
+            - return []
+        - what if we have repetitive numbers?
+        - what if we have a null element or string element?
+        - what if we have a number larger than the size of the array?
+        like we have a number 10 but our size is of 5
+
+    Brute forcce
+        - [5, 0, 1, 2, 3, 4] - elements
+        -  0, 1, 2, 3, 4, 5 - index
+
+        iteration
+        - current index = 5 (the element)
+        - ans = [4]
+
+        - curr index = 0
+        - ans = [4, 5]
+
+        - curr index = 1
+        - ans = [4, 5, 0]
+
+        - curr index = 2
+        - ans = [4, 5, 0, 1]
+
+        - curr index = 3
+        - ans = [4, 5, 0, 1, 2]
+
+
+     */
+
+     // create a ans variable and assign it to an empty array
+
+     // loop through the nums arr
+        // create a currIdx variable and assign it to the nums[nums[i]]
+        // if the current index === currIdx
+            // add to our ans array the num that is in the currIdx
+
+    // return the ans array
+
+    let ans = [];
+
+    for (let i = 0; i < nums.length; i++) {
+        // if (nums[i] === i) {
+        //     ans.push(nums[i])
+        // }
+        console.log('the index -----', i)
+        console.log('the nums i', nums[i])
+        console.log('the nums in the nums index', nums[nums[i]])
+        ans.push(nums[i])
+
+
+
+    }
+
+    return ans
+
+};
+
+
+let nums = [0,2,1,5,3,4]
+console.log(buildArray(nums))//Output: [0,1,2,4,5,3]
+
+
+
+
+
+
+
+/*
+PYTHON WITH BRIAN WANG
+https://app.coderpad.io/JH34W3PX
+
+
+# Given an integer array nums sorted in non-decreasing order, remove the duplicates in-place such that each unique element appears only once. The relative order of the elements should be kept the same. Then return the number of unique elements in nums.
+# Consider the number of unique elements of nums be k, to get accepted, you need to do the following things:
+## Change the array nums such that the first k elements of nums contain the unique elements in the order they were present in nums initially. The remaining elements of nums are not important as well as the size of nums.
+## Return k.
+
+# Input: nums = [0,0,1,1,1,2,2,3,3,4]
+# Output: 5, nums = [0,1,2,3,4,_,_,_,_,_]
+# Explanation: Your function should return k = 5, with the first five elements of nums being 0, 1, 2, 3, and 4 respectively.
+# It does not matter what you leave beyond the returned k (hence they are underscores).
+
+# what happens when the array is empty?
+#- then you return 0 and nums is not modified OR you won't get an empty array. just assume array will be well formed
+
+# what happens if array is nil?
+#- return -1
+
+# what happens if the array is unsorted? should I sort it myself?
+#- you won't get an unsorted array
+
+# num = [0,0,1,1,1,2,2,3,3,4]
+# current = 0
+# next = 0
+# current == next, remove next from the array
+
+# num = [0,_,1,1,1,2,2,3,3,4]
+# current = 0
+# next = 1
+# current != next, increment by 1
+
+# num = [0,_,1,1,1,2,2,3,3,4]
+# current = 1
+# next = 1
+# current == next, remove next from array
+
+# num = [0,_,1,_,1,2,2,3,3,4]
+# current = 1
+# next = 1
+# current == next, remove next from array
+
+# num = [0,_,1,_,_,2,2,3,3,4]
+# current = 1
+# next = 2
+# they don't equal, increment
+# num = [0,_,1,_,_,2,2,3,3,4]
+# num = [0,_,1,_,_,2,_,3,3,4]
+# num = [0,_,1,_,_,2,_,3,3,4]
+# num = [0,_,1,_,_,2,_,3,_,4]
+# k = num.count and then i just return k
+def isSorted(nums):
+    for i in range(0, len(nums) - 1):
+        if nums[i] > nums[i+1]:
+            return False
+    return True
+
+def removeDuplicates(nums): #O(n)
+    if nums == None:
+        return -1
+    if not isSorted(nums):
+        nums.sort() # O(nlogn) time
+
+    i = 0
+    while (i < len(nums) - 1):
+        current = nums[i]
+        next = nums[i+1]
+        if current == next:
+            del nums[i+1]
+        else:
+            i = i + 1
+
+    return len(nums)
+
+
+# Test case 1
+print("===========================")
+nums = []
+k = removeDuplicates(nums)
+print("expected: [], got ", nums)
+print("expected: 0, got ", k)
+
+# Test case 2
+print("===========================")
+nums = None
+k = removeDuplicates(nums)
+print("expected: None, got ", nums)
+print("expected: -1, got ", k)
+
+# Test case 3
+print("===========================")
+nums = [0,0,1,1,1,2,2,3,3,4]
+k = removeDuplicates(nums)
+print("expected: [0,1,2,3,4], got ", nums)
+print("expected: 5, got ", k)
+
+# Test case 4
+print("===========================")
+nums = [4,0,0,1,1,1,2,2,3,3]
+k = removeDuplicates(nums)
+print("expected: [0,1,2,3,4], got ", nums)
+print("expected: 5, got ", k)
+
+# Test case 5
+print("===========================")
+nums = [0,0,0,0,0,0,0,0,0,0]
+k = removeDuplicates(nums)
+print("expected: [0], got ", nums)
+print("expected: 1, got ", k)
+
+
+
+
+
+
+
+
+*/
