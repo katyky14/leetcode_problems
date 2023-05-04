@@ -1,3 +1,100 @@
+
+
+
+
+
+
+
+
+/*
+     FLOOD FILL
+
+An image is represented by an m x n integer grid image where image[i][j] represents the pixel value of the image.
+
+You are also given three integers sr, sc, and color. You should perform a flood fill on the image starting from the pixel image[sr][sc].
+
+To perform a flood fill, consider the starting pixel, plus any pixels connected 4-directionally to the starting pixel of the same color as the starting pixel, plus any pixels connected 4-directionally to those pixels (also with the same color), and so on. Replace the color of all of the aforementioned pixels with color.
+
+Return the modified image after performing the flood fill.
+
+
+
+Example 1:
+
+
+Input: image = [[1,1,1],[1,1,0],[1,0,1]], sr = 1, sc = 1, color = 2
+Output: [[2,2,2],[2,2,0],[2,0,1]]
+Explanation: From the center of the image with position (sr, sc) = (1, 1) (i.e., the red pixel), all pixels connected by a path of the same color as the starting pixel (i.e., the blue pixels) are colored with the new color.
+Note the bottom corner is not colored 2, because it is not 4-directionally connected to the starting pixel.
+Example 2:
+
+Input: image = [[0,0,0],[0,0,0]], sr = 0, sc = 0, color = 0
+Output: [[0,0,0],[0,0,0]]
+Explanation: The starting pixel is already colored 0, so no changes are made to the image.
+
+
+Constraints:
+
+m == image.length
+n == image[i].length
+1 <= m, n <= 50
+0 <= image[i][j], color < 216
+0 <= sr < m
+0 <= sc < n
+
+
+
+*/
+
+
+var floodFill = function(image, sr, sc, color) {
+    let oldColor = image[sr][sc]
+    console.log('the image', image)
+    if (oldColor === color) return image;
+
+    //console.log('the image after', image)
+    let queue = [[sr, sc]];
+    console.log('the queue', queue)
+
+    while (queue.length) {
+        let row = queue[0][0];// sr
+        let col = queue[0][1]; // sc
+        // console.log('the row', row);
+
+        // console.log('the col', col);
+
+        queue.shift();// removes the first element
+
+        if (oldColor === image[row][col]) {
+            image[row][col] = color;
+
+            if (row + 1 <= image.length - 1) queue.push([row + 1, col]); // push the right most side of the arr
+            if (row - 1 >= 0) queue.push([row - 1, col]); // pushes the left most side of the arr
+            if (col + 1 <= image[0].length - 1) queue.push([row, col + 1]) // far most bottom
+            if (col - 1 >= 0) queue.push([row, col - 1]); // far most top
+        }
+    }
+
+    return image;
+};
+
+// let image = [[1,1,1],[1,1,0],[1,0,1]]
+// let sr = 1
+// let sc = 1
+// let color = 2
+// console.log(floodFill(image, sr, sc, color))
+
+// let image1 = [[0,0,0],[0,0,0]]
+// let sr1 = 0
+// let sc1 = 0
+// let color1 = 0
+// console.log(floodFill(image1, sr1, sc1, color1))
+
+
+
+
+
+
 /*
 You are given an integer array height of length n. There are n vertical lines drawn
 such that the two endpoints of the ith line are (i, 0) and (i, height[i]).
@@ -932,9 +1029,9 @@ var buildArray = function(nums) {
         // if (nums[i] === i) {
         //     ans.push(nums[i])
         // }
-        console.log('the index -----', i)
-        console.log('the nums i', nums[i])
-        console.log('the nums in the nums index', nums[nums[i]])
+        // console.log('the index -----', i)
+        // console.log('the nums i', nums[i])
+        // console.log('the nums in the nums index', nums[nums[i]])
         ans.push(nums[i])
 
 
