@@ -2,6 +2,54 @@
 
 
 
+/*
+Consonant Cancel
+Write a function consonantCancel that takes in a sentence and returns a new sentence where every word begins with it's first vowel.
+
+*/
+
+function consonantCancel(sentence) {
+    // your code here
+}
+
+console.log(consonantCancel("down the rabbit hole")); // "own e abbit ole"
+console.log(consonantCancel("writing code is challenging")); // "iting ode is allenging"
+
+
+
+
+
+
+
+
+/*
+Same Char Collapse
+Write a function sameCharCollapse that takes in a string and returns a collapsed version of the string.
+To collapse the string, we repeatedly delete 2 adjacent characters that are the same until there are no such adjacent characters.
+ If there are multiple pairs that can be collapsed, delete the leftmost pair.
+ For example, we take the following steps to collapse "zzzxaaxy": zzzxaaxy -> zxaaxy -> zxxy -> zy
+
+
+*/
+
+function sameCharCollapse(str) {
+    let stack = [];
+
+    for (let i = 0; i < str.length; i++) {
+        if (stack[stack.length - 1] === str[i]) {
+            stack.pop()
+        } else {
+            stack.push(str[i])
+        }
+    }
+
+    return stack.join("")
+}
+
+//console.log(sameCharCollapse("zzzxaaxy"));  // "zy"
+// because zzzxaaxy -> zxaaxy -> zxxy -> zy
+//console.log(sameCharCollapse("uqrssrqvtt")); // "uv"
+// because uqrssrqvtt -> uqrrqvtt -> uqqvtt -> uvtt -> uv
 
 
 
@@ -13,7 +61,9 @@ An image is represented by an m x n integer grid image where image[i][j] represe
 
 You are also given three integers sr, sc, and color. You should perform a flood fill on the image starting from the pixel image[sr][sc].
 
-To perform a flood fill, consider the starting pixel, plus any pixels connected 4-directionally to the starting pixel of the same color as the starting pixel, plus any pixels connected 4-directionally to those pixels (also with the same color), and so on. Replace the color of all of the aforementioned pixels with color.
+To perform a flood fill, consider the starting pixel, plus any pixels connected 4-directionally to the starting pixel
+of the same color as the starting pixel, plus any pixels connected 4-directionally to those pixels (also with the same color),
+and so on. Replace the color of all of the aforementioned pixels with color.
 
 Return the modified image after performing the flood fill.
 
@@ -24,7 +74,8 @@ Example 1:
 
 Input: image = [[1,1,1],[1,1,0],[1,0,1]], sr = 1, sc = 1, color = 2
 Output: [[2,2,2],[2,2,0],[2,0,1]]
-Explanation: From the center of the image with position (sr, sc) = (1, 1) (i.e., the red pixel), all pixels connected by a path of the same color as the starting pixel (i.e., the blue pixels) are colored with the new color.
+Explanation: From the center of the image with position (sr, sc) = (1, 1) (i.e., the red pixel),
+all pixels connected by a path of the same color as the starting pixel (i.e., the blue pixels) are colored with the new color.
 Note the bottom corner is not colored 2, because it is not 4-directionally connected to the starting pixel.
 Example 2:
 
@@ -47,14 +98,14 @@ n == image[i].length
 */
 
 
-var floodFill = function(image, sr, sc, color) {
+var floodFill = function (image, sr, sc, color) {
     let oldColor = image[sr][sc]
-    console.log('the image', image)
+    //console.log('the image', image)
     if (oldColor === color) return image;
 
     //console.log('the image after', image)
     let queue = [[sr, sc]];
-    console.log('the queue', queue)
+    //console.log('the queue', queue)
 
     while (queue.length) {
         let row = queue[0][0];// sr
@@ -931,7 +982,7 @@ let board =
 // console.log(isValidSudoku(board2))//Output: false
 
 
-var merge = function(intervals) {
+var merge = function (intervals) {
 
     // let stack = [];
     // for (let i = 0; i < intervals.length; i++) {
@@ -950,16 +1001,16 @@ var merge = function(intervals) {
 
     // return stack
 
-    intervals.sort((a, b ) => a[0] - b[0]);
+    intervals.sort((a, b) => a[0] - b[0]);
     //intervals.sort()
 
     let stack = [intervals[0]]; // avoid edge case??
 
     for (let i = 0; i < intervals.length; i++) {
-        let lastEnd = stack[stack.length -1];
-        console.log('the last end', lastEnd)
-        console.log('the 0 interval', intervals[0])
-        console.log('the 1 inter', intervals[1])
+        let lastEnd = stack[stack.length - 1];
+        // console.log('the last end', lastEnd)
+        // console.log('the 0 interval', intervals[0])
+        // console.log('the 1 inter', intervals[1])
         if (intervals[1] <= lastEnd[1]) {
             stack[1] = Math.max(lastEnd[1], intervals[1])
         } else {
@@ -972,12 +1023,12 @@ var merge = function(intervals) {
 
 
 
-let intervals = [[1,3],[2,6],[8,10],[15,18]]
+let intervals = [[1, 3], [2, 6], [8, 10], [15, 18]]
 //console.log(merge(intervals))//Output: [[1,6],[8,10],[15,18]]
 
 
 
-var buildArray = function(nums) {
+var buildArray = function (nums) {
     /*
     i = array of nums
     return ans array
@@ -1014,12 +1065,12 @@ var buildArray = function(nums) {
 
      */
 
-     // create a ans variable and assign it to an empty array
+    // create a ans variable and assign it to an empty array
 
-     // loop through the nums arr
-        // create a currIdx variable and assign it to the nums[nums[i]]
-        // if the current index === currIdx
-            // add to our ans array the num that is in the currIdx
+    // loop through the nums arr
+    // create a currIdx variable and assign it to the nums[nums[i]]
+    // if the current index === currIdx
+    // add to our ans array the num that is in the currIdx
 
     // return the ans array
 
@@ -1043,8 +1094,8 @@ var buildArray = function(nums) {
 };
 
 
-let nums = [0,2,1,5,3,4]
-console.log(buildArray(nums))//Output: [0,1,2,4,5,3]
+let nums = [0, 2, 1, 5, 3, 4]
+// console.log(buildArray(nums))//Output: [0,1,2,4,5,3]
 
 
 
@@ -1057,9 +1108,11 @@ PYTHON WITH BRIAN WANG
 https://app.coderpad.io/JH34W3PX
 
 
-# Given an integer array nums sorted in non-decreasing order, remove the duplicates in-place such that each unique element appears only once. The relative order of the elements should be kept the same. Then return the number of unique elements in nums.
+# Given an integer array nums sorted in non-decreasing order, remove the duplicates in-place such that each unique element appears only once.
+The relative order of the elements should be kept the same. Then return the number of unique elements in nums.
 # Consider the number of unique elements of nums be k, to get accepted, you need to do the following things:
-## Change the array nums such that the first k elements of nums contain the unique elements in the order they were present in nums initially. The remaining elements of nums are not important as well as the size of nums.
+## Change the array nums such that the first k elements of nums contain the unique elements in the order
+they were present in nums initially. The remaining elements of nums are not important as well as the size of nums.
 ## Return k.
 
 # Input: nums = [0,0,1,1,1,2,2,3,3,4]
