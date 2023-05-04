@@ -2,6 +2,10 @@
 
 
 
+
+
+
+
 /*
 Consonant Cancel
 Write a function consonantCancel that takes in a sentence and returns a new sentence where every word begins with it's first vowel.
@@ -9,11 +13,26 @@ Write a function consonantCancel that takes in a sentence and returns a new sent
 */
 
 function consonantCancel(sentence) {
-    // your code here
+
+
+    let arr = sentence.split(" ");
+    let vowels = 'aeiou';
+    let result = '';
+    for (let i = 0; i < arr.length; i++) {
+        let word = arr[i];
+        for (let j = 0; j < word.length; j++) {
+            let ele = word[j]
+            if (vowels.includes(ele)) {
+               result += word.slice(j) + ' '
+               break
+            }
+        }
+    }
+    return result
 }
 
-console.log(consonantCancel("down the rabbit hole")); // "own e abbit ole"
-console.log(consonantCancel("writing code is challenging")); // "iting ode is allenging"
+// console.log(consonantCancel("down the rabbit hole")); // "own e abbit ole"
+// console.log(consonantCancel("writing code is challenging")); // "iting ode is allenging"
 
 
 
