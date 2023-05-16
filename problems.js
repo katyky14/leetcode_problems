@@ -46,7 +46,22 @@ Follow up: Can you come up with an algorithm that runs in O(m + n) time?
 
 */
 
+var merge = function(nums1, m, nums2, n) {
+    // loop thru the nums1
+      // slice the n side of the array
+      // add the nums2 to the size
 
+      for (let i = 0; i < nums1.length; i++) {
+          nums1.splice(m);
+
+          for (let j = 0; j < nums2.length; j++) {
+              nums1.push(nums2[j])
+          }
+      }
+
+      nums1.sort((a, b) => a - b )
+      return nums1
+  };
 
 
 
