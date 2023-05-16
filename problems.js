@@ -51,19 +51,40 @@ var merge = function(nums1, m, nums2, n) {
       // slice the n side of the array
       // add the nums2 to the size
 
-      for (let i = 0; i < nums1.length; i++) {
-          nums1.splice(m);
+    //   for (let i = 0; i < nums1.length; i++) {
+    //       nums1.splice(m);
 
-          for (let j = 0; j < nums2.length; j++) {
-              nums1.push(nums2[j])
-          }
-      }
+    //       for (let j = 0; j < nums2.length; j++) {
+    //           nums1.push(nums2[j])
+    //       }
+    //   }
 
-      nums1.sort((a, b) => a - b )
-      return nums1
+    //   nums1.sort((a, b) => a - b )
+    //   return nums1
+
+    // two pointers solution
+
+    let i = m - 1 // for the nums1 array
+    let j = n - 1 // for the nums2 array
+    let temp = nums1.length - 1 // the total length of the nums1 - m + n - 1
+
+    while (j >= 0) {
+        if (i >= 0 && nums1[i] > nums2[j]) {
+            nums1[temp] = nums1[i]
+            temp--
+            i--
+        } else {
+            nums1[temp] = nums2[j]
+            temp--
+            j--
+        }
+    }
+
+    return nums1
   };
 
-
+ let nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3
+console.log(merge(nums1, m, nums2, n)) // [1,2,2,3,5,6]
 
 
 
