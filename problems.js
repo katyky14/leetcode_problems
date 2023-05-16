@@ -4,6 +4,175 @@
 
 
 
+/*
+Pyramid Sum
+Write a function pyramidSum that takes in an array of numbers representing the base of a pyramid.
+ The function should return a 2D array representing a complete pyramid with the given base.
+ To construct a level of the pyramid, we take the sum of adjacent elements of the level below.
+
+*/
+
+
+function pyramidSum(base) {
+    // your code here
+    // create a array result variable
+
+    // loop throu base
+        // create a sum variable
+        // store the current in a variable
+        // loop thru the array again
+            // sum the current plus the adjacent one
+            // push the sum to the array as an array
+    // return the array result
+
+    let queue = [base];
+
+    while (queue.length < base.length) {
+        let prevSum = queue[0];
+        let arr = [];
+
+        for (let i = 0; i < prevSum.length; i++) {
+            if (i  !== prevSum.length - 1) {
+                arr.push(prevSum[i] + prevSum[i + 1]);
+            }
+        }
+
+        queue.unshift(arr)
+    }
+
+    return queue
+
+
+}
+
+// console.log(pyramidSum([1, 4, 6])); // [[15], [5, 10], [1, 4, 6]]
+// console.log(pyramidSum([3, 7, 2, 11])); // [[41], [19, 22], [10, 9, 13], [3, 7, 2, 11]]
+
+/*
+[1, 4 , 6] ---> [1+4 = 5, 6 + 4 = 10] ---> [15]
+*/
+
+
+
+/*
+
+All Else Equal
+Write a function allElseEqual that takes in an array of numbers.
+The function should return the element of the array that is equal to half of the sum of all elements of the array.
+If there is no such element, the method should return null.
+
+
+*/
+
+function allElseEqual(arr) {
+    // your code here
+    /*
+    create a sum variable assign it to zero
+    loop through the array
+        sum all elements of the array to the sum
+
+        if the average of the sum is equal to one of the elements
+            return true
+        else
+            return null
+    */
+
+
+       let sum = 0;
+       for  (let i = 0; i < arr.length; i++) {
+            sum = sum + arr[i];
+        }
+
+        for (let j = 0; j < arr.length; j++) {
+            if (sum / 2 === arr[j]) {
+                return arr[j]
+            }
+        }
+
+        return null
+
+
+
+
+}
+
+// console.log(allElseEqual([2, 4, 3, 10, 1])); // 10
+// console.log(allElseEqual([6, 3, 5, -9, 1])); // 3
+// console.log(allElseEqual([1, 2, 3, 4]));     // null
+
+
+
+
+/*
+Anagrams
+Write a function anagrams that takes in two words and returns a boolean indicating whether or not the words are anagrams.
+ Anagrams are words that contain the same characters but not necessarily in the same order. Solve this without using .sort().
+
+*/
+
+function anagrams(word1, word2) {
+    // create a stack variable
+    // loop thru word1 and push it to the stack
+    // compare it to the word2
+    // and see if the stack is empty
+
+    // let stack = [];
+
+    // if (word1.length !== word2.length) return false
+
+    // for (let i = 0;  i < word1.length; i++) {
+    //     let str1 = word1[i];
+    //     stack.push(str1)
+    //     for (let j = 0; j < word2.length; j++) {
+    //         let str2 = word2[j];
+
+    //         if (stack[stack.length - 1] === str2) {
+    //             stack.pop()
+    //         }
+    //     }
+    // }
+
+    // return stack.length === 0
+
+
+
+    if (word1.length !== word2.length) return false;
+
+    let count = {};
+
+    for (let i = 0; i < word1.length; i++) {
+        if (count[word1[i]]) {
+            count[word1[i]]++
+        } else {
+            count[word1[i]] = 1
+        }
+    }
+
+    for (let i = 0; i < word2.length; i++) {
+        if (count[word2[i]]) {
+            count[word2[i]]--
+        } else {
+            count[word2[i]] = 1
+        }
+    }
+    console.log(count)
+
+    for (char in count) {
+        if (count[char] !== 0) return false
+    }
+
+    return true
+
+
+
+}
+
+// console.log(anagrams("cat", "act"));          // true
+// console.log(anagrams("restful", "fluster"));  // true
+// console.log(anagrams("cat", "dog"));          // false
+// console.log(anagrams("boot", "bootcamp"));    // false
+
+
 
 
 /*
@@ -13,21 +182,22 @@ Write a function consonantCancel that takes in a sentence and returns a new sent
 */
 
 function consonantCancel(sentence) {
-
-
     let arr = sentence.split(" ");
     let vowels = 'aeiou';
     let result = '';
+
     for (let i = 0; i < arr.length; i++) {
-        let word = arr[i];
-        for (let j = 0; j < word.length; j++) {
-            let ele = word[j]
-            if (vowels.includes(ele)) {
-               result += word.slice(j) + ' '
-               break
+        let words = arr[i]
+        for (let j = 0; j < words.length; j++) {
+            if (vowels.includes(arr[i][j])) {
+
+                result += words.slice(j) + " "
+                break
             }
+
         }
     }
+
     return result
 }
 
@@ -61,14 +231,13 @@ function sameCharCollapse(str) {
             stack.push(str[i])
         }
     }
-
     return stack.join("")
 }
 
-//console.log(sameCharCollapse("zzzxaaxy"));  // "zy"
-// because zzzxaaxy -> zxaaxy -> zxxy -> zy
-//console.log(sameCharCollapse("uqrssrqvtt")); // "uv"
-// because uqrssrqvtt -> uqrrqvtt -> uqqvtt -> uvtt -> uv
+// console.log(sameCharCollapse("zzzxaaxy"));  // "zy"
+// // because zzzxaaxy -> zxaaxy -> zxxy -> zy
+// console.log(sameCharCollapse("uqrssrqvtt")); // "uv"
+// // because uqrssrqvtt -> uqrrqvtt -> uqqvtt -> uvtt -> uv
 
 
 
