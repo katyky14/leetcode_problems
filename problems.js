@@ -1,6 +1,13 @@
 
 
 
+
+
+
+
+
+
+
 /*
 Double Letter Count
 Write a function doubleLetterCount that takes in a string and returns the
