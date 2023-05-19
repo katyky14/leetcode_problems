@@ -62,8 +62,8 @@ function vowelCipher(string) {
 }
 
 
-console.log(vowelCipher("bootcamp")); // "buutcemp"
-console.log(vowelCipher("paper cup")); // "pepir cap"
+// console.log(vowelCipher("bootcamp")); // "buutcemp"
+// console.log(vowelCipher("paper cup")); // "pepir cap"
 
 
 
