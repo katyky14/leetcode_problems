@@ -15,8 +15,22 @@ of the original is shifted num characters in the alphabet.
 
 function caesarCipher(string, num) {
 
+    let alphabet = "abcdefghijklmnopqrstuvwxyz"
+    let res = ""
 
+    for (let i = 0; i < string.length; i++) {
+        let char = string[i];
 
+        if (alphabet.includes(char)) {
+            let oldIdx = alphabet.indexOf(char);
+            let newIdx = oldIdx + num;
+            let newChar = alphabet[newIdx % alphabet.length];
+
+            res += newChar
+        }
+    }
+
+    return res
 
 }
 
