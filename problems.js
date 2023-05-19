@@ -1,8 +1,41 @@
 
 
+/*
+
+Vowel Cipher
+Write a function vowelCipher that takes in a string and returns a new string
+where every vowel becomes the next vowel in the alphabet.
 
 
+*/
 
+function vowelCipher(string) {
+    // your code here
+    let vowels = "aeiou";
+
+    let res = "";
+
+    for (let i = 0; i < string.length; i++) {
+
+          if (vowels.includes(string[i])) {
+            let oldIdx = vowels.indexOf(string[i]);
+            let newIdx = oldIdx + 1;
+            let newChar = vowels[newIdx % vowels.length]
+            res += newChar
+          } else {
+            res += string[i]
+          }
+
+    }
+
+    return res
+
+
+}
+
+
+console.log(vowelCipher("bootcamp")); // "buutcemp"
+console.log(vowelCipher("paper cup")); // "pepir cap"
 
 
 
@@ -235,7 +268,7 @@ var merge = function(nums1, m, nums2, n) {
   };
 
  let nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3
-console.log(merge(nums1, m, nums2, n)) // [1,2,2,3,5,6]
+//console.log(merge(nums1, m, nums2, n)) // [1,2,2,3,5,6]
 
 
 
